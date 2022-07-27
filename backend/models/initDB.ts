@@ -1,6 +1,6 @@
-import { DataTypes, Sequelize } from 'sequelize';
+import { Sequelize } from 'sequelize';
 
-import { User } from './user';
+import { User, userData } from './user';
 
 export const sequelize = new Sequelize({
     dialect: 'sqlite',
@@ -8,14 +8,5 @@ export const sequelize = new Sequelize({
 });
 
 export function initDatabase() {
-    User.init({
-        id: {
-            type: DataTypes.INTEGER,
-            autoIncrement: true,
-            primaryKey: true
-        }
-    }, {
-        sequelize,
-        modelName: 'User'
-    })
+    User.init(...userData)
 }
