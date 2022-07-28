@@ -1,6 +1,7 @@
 {
   "scripts": {
-    "tsc": "tsc"
+    "tsc": "tsc",
+    "start": "npx nodemon --watch ./ -e ts --exec \"npm run tsc --verbose && node out-tsc/main.js\""
   },
   "devDependencies": {
     "@types/express": "^4.17.13",
