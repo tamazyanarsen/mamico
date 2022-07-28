@@ -12,16 +12,22 @@ export function initUserRoutes() {
             }
         }).then(user => {
             console.log('user: ', user);
-            user ?? res.json(user)
+            if (user) {
+                res.json((user as unknown as { dataValues: unknown }).dataValues)
+            } else {
+                res.json(null)
+            }
         })
 
     })
 
     app.post('/user', upload.none(), (req, res) => {
-        console.log('req.query: ', req.query);
-        console.log('req.params: ', req.params);
         console.log('req.body: ', req.body);
+        const { name, city } = req.body;
+        console.log('city: ', city);
+        console.log('name: ', name);
         res.json(req.body);
+        User.create({ name, city })
     })
     console.log('finish!!! init user routes', app.routes);
 }

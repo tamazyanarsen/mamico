@@ -9,4 +9,5 @@ export const userData = {
         primaryKey: true
     },
     name: DataTypes.STRING,
+    city: DataTypes.STRING
 };
