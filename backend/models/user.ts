@@ -1,17 +1,12 @@
 import { DataTypes, Model } from 'sequelize';
 
-import { InitModel } from '../config/initModel.type';
-import { sequelize } from './initDB';
-
 export class User extends Model {}
 
-export const userData: InitModel<User> = [{
+export const userData = {
     id: {
         type: DataTypes.INTEGER,
         autoIncrement: true,
         primaryKey: true
-    }
-}, {
-    sequelize,
-    modelName: 'User'
-}];
+    },
+    name: DataTypes.STRING,
+};

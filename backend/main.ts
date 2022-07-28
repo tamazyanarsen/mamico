@@ -1,8 +1,15 @@
+import bodyParser from 'body-parser';
 import express from 'express';
 
 import { initDatabase } from './models/initDB';
+import { initUserRoutes } from './services/user.service';
 
 export const app = express();
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+
+initUserRoutes();
 
 app.get('/hello', (req, res) => {
     console.log(req, res)

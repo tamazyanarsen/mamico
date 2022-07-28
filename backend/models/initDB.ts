@@ -7,6 +7,8 @@ export const sequelize = new Sequelize({
     storage: 'db/db.sqlite'
 });
 
-export function initDatabase() {
-    User.init(...userData)
+export async function initDatabase() {
+    User.init(userData, { sequelize, modelName: 'User' })
+
+    await sequelize.sync({ force: true });
 }
