@@ -3,7 +3,6 @@ import { User } from '../models/user';
 import { upload } from './../config/config';
 
 export function initUserRoutes() {
-    console.log('start init user routes');
     app.get('/user/:userId', (req, res) => {
         console.log(req.params);
         User.findOne({
@@ -11,15 +10,20 @@ export function initUserRoutes() {
                 id: req.params.userId
             }
         }).then(user => {
-            console.log('user: ', user);
             if (user) {
-                res.json((user as unknown as { dataValues: unknown }).dataValues)
+                res.json(user);
             } else {
                 res.json(null)
             }
         })
 
     })
+
+    app.get('/users', (_req, res) => {
+        User.findAll().then(e => {
+            res.json(e);
+        });
+    });
 
     app.post('/user', upload.none(), (req, res) => {
         console.log('req.body: ', req.body);
@@ -29,5 +33,4 @@ export function initUserRoutes() {
         res.json(req.body);
         User.create({ name, city })
     })
-    console.log('finish!!! init user routes', app.routes);
 }
